@@ -1,4 +1,6 @@
 
+import { authService } from "./firebase.js";
+
 export const route = (event) => {
   event.preventDefault();
   console.log("event.target.hash:", event.target.hash);
@@ -57,6 +59,22 @@ export const handleLocation = async () => {
     document.getElementById("index_sidebar").innerHTML = sidebarhtml;
     document.getElementById("index_page").innerHTML = pagehtml;
     document.getElementById("index_footer").innerHTML = footerhtml;
+
+    //메인페이지 사진,닉네임 변경 부분
+    //메인페이지의 nickname을 nickname1이라고 변경
+    document.getElementById("nickname1").textContent =
+    authService.currentUser.displayName ?? "닉네임 없음";
+    document.getElementById("profileImg").src =
+    authService.currentUser.photoURL ?? "../image/test1.jpg";
+
+    //모달창 프로필 사진, 닉네임 변경
+    //profileView :모달창 사진
+    //nickname : 모달창 닉네임
+    document.getElementById("nickname").textContent =
+    authService.currentUser.displayName ?? "닉네임 없음";
+
+    document.getElementById("profileView").src =
+    authService.currentUser.photoURL ?? "../image/test1.jpg";
 
   }
 
